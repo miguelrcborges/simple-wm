@@ -1,9 +1,9 @@
 CXX = g++
 WARNINGS = -Wall -Wextra -Wwrite-strings -Wno-unused-results
-CFLAGS = -march=native -O2 -ftree-vectorize -fno-sematic-interposition -fno-plt -pipe -s -flto -D_FORTIFY_SOURCE=1
+CFLAGS = -march=native -O2 -ftree-vectorize -fno-semantic-interposition -fno-plt -pipe -s -flto -D_FORTIFY_SOURCE=1
 DEBUGFLAGS = -Og -g
 INCLUDES =
-LINKS = -lX11
+LINKS = 
 
 SRC = $(wildcard src/*.cpp)
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
@@ -13,7 +13,7 @@ BINDIR = bin
 
 .PHONY = clean install uninstall debug build run
 
-debug: $(BINDIR) bin/debug
+debug: $(OBJDIR) $(BINDIR) bin/debug
 
 build: $(BINDIR) bin/swm
 	
@@ -44,4 +44,4 @@ bin/debug: $(OBJ)
 	$(CXX) $(DEBUGFLAGS) $(LINKS) $^ -o $@
 
 obj/%.o: src/%.cpp
-	$(CXX) $(DEBUGFLAGS) $(INCLUDES) $^ -o $@
+	$(CXX) -c $(DEBUGFLAGS) $(INCLUDES) $^ -o $@
