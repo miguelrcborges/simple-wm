@@ -1,0 +1,7 @@
+Language: Cpp
+UseTab: ForIndentation
+IndentWidth: 8
+TabWidth: 8
+# LineEnding: LF # Requires clang-format 16
+PointerAlignment: Right
+DerivePointerAlignment: false

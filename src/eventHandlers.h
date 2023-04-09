@@ -4,5 +4,6 @@
 #include <X11/Xlib.h>
 
 void onKeyPress(const XKeyEvent &event);
+void onEnterNotify(const XEnterWindowEvent &event);
 
 #endif

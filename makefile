@@ -11,7 +11,7 @@ OBJDIR = obj
 BINDIR = bin
 
 
-.PHONY = clean install uninstall debug build run
+.PHONY = clean install uninstall debug build run format
 
 debug: $(OBJDIR) $(BINDIR) bin/debug
 
@@ -29,6 +29,9 @@ uninstall:
 
 run: debug
 	xinit ./bin/debug -- :1 vt2
+
+format:
+	clang-format -i -style=file:src/.clang-format src/*
 
 
 $(BINDIR):

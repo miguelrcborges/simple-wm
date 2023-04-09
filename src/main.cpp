@@ -1,23 +1,21 @@
-#include <iostream>
-#include <cstring>
 #include <cstdlib>
+#include <cstring>
+#include <iostream>
 
 #include <X11/Xlib.h>
 
 #include "eventHandlers.h"
 
-void printVersion() {
-	std::cout << "swm non working yet lol version.\n";
-}
+void printVersion() { std::cout << "swm non working yet lol version.\n"; }
 
 void printUsage() {
 	std::cout << "swm - simple window manager\n"
-		"Usage:\n"
-		"\tswm [OPTION]\n"
-		"\n"
-		"Options:\n"
-		"\t-h : Displays this message\n"
-		"\t-v : Displays the version\n";
+	             "Usage:\n"
+	             "\tswm [OPTION]\n"
+	             "\n"
+	             "Options:\n"
+	             "\t-h : Displays this message\n"
+	             "\t-v : Displays the version\n";
 }
 
 int errorOtherWmRunning(Display *display, XErrorEvent *event) {
@@ -51,7 +49,7 @@ int main(int argc, char **argv) {
 
 	const Window root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
-	XSelectInput(display, root_window, SubstructureNotifyMask | SubstructureRedirectMask);
+	XSelectInput(display, root_window, SubstructureNotifyMask);
 
 	for (;;) {
 		XEvent event;
@@ -59,13 +57,18 @@ int main(int argc, char **argv) {
 
 		switch (event.type) {
 
+		case EnterNotify:
+			onEnterNotify(event.xcrossing);
+			break;
+
 		case KeyPress:
 			onKeyPress(event.xkey);
 			break;
-		
+
 		// Handle X events here
 		default:
-			std::cerr << "Unhandled event type: " << event.type << std::endl;
+			std::cerr << "Unhandled event type: " << event.type
+			          << std::endl;
 			break;
 		}
 	}
