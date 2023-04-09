@@ -1,0 +1,14 @@
+Language:        Cpp
+BasedOnStyle:    Google
+IndentWidth:     4
+UseTab:          Never
+TabWidth:        4
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine:        false
+DerivePointerAlignment:             false
+PointerAlignment:                   Left
+BreakBeforeBraces:                  Allman
+ColumnLimit:                        100
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+IndentCaseLabels:                   true
+IndentPPDirectives:                 AfterHash
