@@ -6,7 +6,9 @@
 
 #include "eventHandlers.h"
 
-void printVersion() { std::cout << "swm non working yet lol version.\n"; }
+void printVersion() {
+	std::cout << "swm non working yet lol version.\n";
+}
 
 void printUsage() {
 	std::cout << "swm - simple window manager\n"
@@ -67,8 +69,7 @@ int main(int argc, char **argv) {
 
 		// Handle X events here
 		default:
-			std::cerr << "Unhandled event type: " << event.type
-			          << std::endl;
+			std::cerr << "Unhandled event type: " << event.type << '\n';
 			break;
 		}
 	}
