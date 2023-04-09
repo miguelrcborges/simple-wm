@@ -3,7 +3,7 @@ WARNINGS = -Wall -Wextra -Wwrite-strings -Wno-unused-results
 CFLAGS = -march=native -O2 -ftree-vectorize -fno-semantic-interposition -fno-plt -pipe -s -flto -D_FORTIFY_SOURCE=1
 DEBUGFLAGS = -Og -g
 INCLUDES =
-LINKS = 
+LINKS = -lX11
 
 SRC = $(wildcard src/*.cpp)
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
