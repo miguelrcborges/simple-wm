@@ -40,17 +40,18 @@ int main(int argc, char **argv) {
 	XSelectInput(display, root_window, SubstructureNotifyMask | SubstructureRedirectMask);
 
 	while (1) {
-        XEvent event;
-        XNextEvent(display, &event);
+		XEvent event;
+		XNextEvent(display, &event);
 
-        switch (event.type) {
-            // Handle X events here
-            default:
-                std::cerr << "Unhandled event type: " << event.type << std::endl;
-                break;
-        }
-    }
+		switch (event.type) {
+		
+		// Handle X events here
+		default:
+			std::cerr << "Unhandled event type: " << event.type << std::endl;
+			break;
+		}
+	}
 
-    XCloseDisplay(display);
-    return 0;
+	XCloseDisplay(display);
+	return 0;
 }
