@@ -15,7 +15,7 @@ void printUsage() {
 		"Usage:\n"
 		"\tswm [OPTION]\n"
 		"\n"
-		"Options:"
+		"Options:\n"
 		"\t-h : Displays this message\n"
 		"\t-v : Displays the version\n";
 }
