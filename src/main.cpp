@@ -26,21 +26,31 @@ int main(int argc, char **argv) {
 		return 0;
 	} else if (argc != 1) {
 		printUsage();
-		return 0;
+		return 1;
 	}
 
 	Display *display = XOpenDisplay(nullptr);
 	if (display == nullptr) {
 		std::cerr << "swm: failed to open display\n";
-		return -1;
+		return 2;
 	}
 
 	const Window root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
 	XSelectInput(display, root_window, SubstructureNotifyMask | SubstructureRedirectMask);
 
-	while (1) {;}
+	while (1) {
+        XEvent event;
+        XNextEvent(display, &event);
 
-	XCloseDisplay(display);
-	return 0;
+        switch (event.type) {
+            // Handle X events here
+            default:
+                std::cerr << "Unhandled event type: " << event.type << std::endl;
+                break;
+        }
+    }
+
+    XCloseDisplay(display);
+    return 0;
 }
