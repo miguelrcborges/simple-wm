@@ -6,11 +6,11 @@
 
 #include "eventHandlers.h"
 
-void printVersion() {
+static void printVersion() {
 	std::cout << "swm non working yet lol version.\n";
 }
 
-void printUsage() {
+static void printUsage() {
 	std::cout << "swm - simple window manager\n"
 	             "Usage:\n"
 	             "\tswm [OPTION]\n"
@@ -20,7 +20,7 @@ void printUsage() {
 	             "\t-v : Displays the version\n";
 }
 
-int errorOtherWmRunning(Display *display, XErrorEvent *event) {
+static int errorOtherWmRunning(Display *display, XErrorEvent *event) {
 	std::cerr << "Another wm is already running.\n";
 	std::exit(-1);
 	return -1;
