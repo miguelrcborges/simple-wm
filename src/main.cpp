@@ -4,10 +4,11 @@
 
 #include <X11/Xlib.h>
 
-#include "config.h"
+#include "actions/actions.h"
 #include "eventHandlers.h"
 
 Display *display;
+Window root_window;
 
 static void printVersion() {
 	std::cout << "swm non working yet lol version.\n";
@@ -52,14 +53,11 @@ int main(int argc, char **argv) {
 		return 2;
 	}
 
-	const Window root_window = DefaultRootWindow(display);
+	root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
 	XSelectInput(display, root_window, SubstructureNotifyMask);
 
-	for (int i = 0; i < keybinds_length; ++i)
-		XGrabKey(display, XKeysymToKeycode(display, keybinds[i].keysym),
-		         keybinds[i].mod, root_window, true, GrabModeAsync,
-		         GrabModeAsync);
+	updateKeybinds();
 
 	for (;;) {
 		XEvent event;
@@ -67,12 +65,16 @@ int main(int argc, char **argv) {
 
 		switch (event.type) {
 
+		case KeyPress:
+			onKeyPress(event.xkey);
+			break;
+
 		case EnterNotify:
 			onEnterNotify(event.xcrossing);
 			break;
 
-		case KeyPress:
-			onKeyPress(event.xkey);
+		case MappingNotify:
+			onMappingNotify(event.xmapping);
 			break;
 
 		// Handle X events here

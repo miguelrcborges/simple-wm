@@ -5,5 +5,6 @@
 
 void onKeyPress(const XKeyEvent &event);
 void onEnterNotify(const XEnterWindowEvent &event);
+void onMappingNotify(const XMappingEvent &event);
 
 #endif
