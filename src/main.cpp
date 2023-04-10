@@ -4,7 +4,10 @@
 
 #include <X11/Xlib.h>
 
+#include "config.h"
 #include "eventHandlers.h"
+
+Display *display;
 
 static void printVersion() {
 	std::cout << "swm non working yet lol version.\n";
@@ -43,7 +46,7 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
-	Display *display = XOpenDisplay(nullptr);
+	display = XOpenDisplay(nullptr);
 	if (display == nullptr) {
 		std::cerr << "swm: failed to open display\n";
 		return 2;
@@ -52,6 +55,11 @@ int main(int argc, char **argv) {
 	const Window root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
 	XSelectInput(display, root_window, SubstructureNotifyMask);
+
+	for (int i = 0; i < keybinds_length; ++i)
+		XGrabKey(display, XKeysymToKeycode(display, keybinds[i].keysym),
+		         keybinds[i].mod, root_window, true, GrabModeAsync,
+		         GrabModeAsync);
 
 	for (;;) {
 		XEvent event;

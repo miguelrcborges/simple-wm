@@ -1,9 +1,9 @@
 #include <iostream>
-#include <unistd.h>
 #include <spawn.h>
+#include <unistd.h>
 
 extern char **environ;
 
-void exec(char **cmd) {
+void spawn(char **cmd) {
 	posix_spawnp(NULL, cmd[0], NULL, NULL, cmd, environ);
 }
