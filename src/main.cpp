@@ -22,8 +22,7 @@ static void printUsage() {
 
 static int errorOtherWmRunning(Display *display, XErrorEvent *event) {
 	std::cerr << "Another wm is already running.\n";
-	std::exit(-1);
-	return -1;
+	return 1; // Return an error code instead of calling std::exit()
 }
 
 int main(int argc, char **argv) {
@@ -53,6 +52,7 @@ int main(int argc, char **argv) {
 	XSetErrorHandler(&errorOtherWmRunning);
 	XSelectInput(display, root_window, SubstructureNotifyMask);
 
+	int ret = 0;
 	for (;;) {
 		XEvent event;
 		XNextEvent(display, &event);
@@ -72,8 +72,12 @@ int main(int argc, char **argv) {
 			std::cerr << "Unhandled event type: " << event.type << '\n';
 			break;
 		}
+
+		if (ret != 0) {
+			break; // Exit the loop if an error occurs
+		}
 	}
 
 	XCloseDisplay(display);
-	return 0;
+	return ret; // Return the error code instead of calling std::exit()
 }
