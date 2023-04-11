@@ -4,11 +4,15 @@
 
 #include <X11/Xlib.h>
 
-#include "actions/actions.h"
+#include "config.h"
 #include "eventHandlers.h"
+#include "Monitors.h"
+#include "utils/utils.h"
 
 Display *display;
+Monitor monitors[max_number_of_monitors];
 Window root_window;
+
 
 static void printVersion() {
 	std::cout << "swm non working yet lol version.\n";
@@ -48,6 +52,7 @@ int main(int argc, char **argv) {
 	}
 
 	display = XOpenDisplay(nullptr);
+
 	if (display == nullptr) {
 		std::cerr << "swm: failed to open display\n";
 		return 2;
@@ -58,6 +63,7 @@ int main(int argc, char **argv) {
 	XSelectInput(display, root_window, SubstructureNotifyMask);
 
 	updateKeybinds();
+	updateMonitors();
 
 	for (;;) {
 		XEvent event;
@@ -70,12 +76,17 @@ int main(int argc, char **argv) {
 			break;
 
 		case EnterNotify:
-			onEnterNotify(event.xcrossing);
-			break;
+		 	onEnterNotify(event.xcrossing);
+		 	break;
 
 		case MappingNotify:
 			onMappingNotify(event.xmapping);
 			break;
+
+		case ConfigureNotify:
+			onConfigureNotify(event.xconfigure);
+			break;
+
 
 		// Handle X events here
 		default:

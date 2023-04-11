@@ -3,11 +3,11 @@ WARNINGS = -Wall -Wextra -Wwrite-strings -Wno-unused-results
 CFLAGS = -march=native -O2 -ftree-vectorize -fno-semantic-interposition -fno-plt -pipe -s -flto -D_FORTIFY_SOURCE=1
 DEBUGFLAGS = -Og -g
 INCLUDES =
-LINKS = -lX11
+LINKS = -lX11 -lXinerama
 
 SRC = $(wildcard src/*.cpp) $(wildcard src/**/*.cpp)
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
-OBJDIR = obj
+OBJDIR = obj obj/actions obj/utils
 BINDIR = bin
 
 
@@ -31,15 +31,14 @@ run: debug
 	xinit ./bin/debug -- :1 vt2
 
 format:
-	clang-format -i -style=file:src/.clang-format src/*.cpp src/**/*.cpp src/*.h src/**/*.h
+	clang-format -i -style=file:src/.clang-format src/*.cpp src/**/*.cpp
 
 
 $(BINDIR):
-	mkdir bin
+	mkdir $@
 
 $(OBJDIR):
-	mkdir obj
-	mkdir obj/actions
+	mkdir $@
 
 bin/swm: $(SRC)
 	$(CXX) $(CFLAGS) $(INCLUDES) $(LINKS) $^ -o $@
