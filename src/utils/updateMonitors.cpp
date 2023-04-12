@@ -7,15 +7,17 @@
 
 extern Display *display;
 extern Monitor monitors[max_number_of_monitors];
+extern int amount_of_connected_monitors;
 
 void updateMonitors() {
 
 #ifdef XINERAMA
 	if (XineramaIsActive(display)) {
-		int num_of_active_mons;
-		XineramaScreenInfo *info = XineramaQueryScreens(display, &num_of_active_mons);
+		XineramaScreenInfo *info = XineramaQueryScreens(display, &amount_of_connected_monitors);
 
-		for (int i = 0; i < num_of_active_mons && i < max_number_of_monitors; ++i) {
+		if (amount_of_connected_monitors > max_number_of_monitors) amount_of_connected_monitors = max_number_of_monitors;
+
+		for (int i = 0; i < amount_of_connected_monitors; ++i) {
 			monitors[i].width = info[i].width;
 			monitors[i].height = info[i].height;
 			monitors[i].x = info[i].x_org;

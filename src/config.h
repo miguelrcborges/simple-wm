@@ -10,12 +10,14 @@ constexpr static char *launcher[] = {(char *)"rofi", (char *)"-show", (char *)"d
 constexpr static char *screenshoot[] = {(char *)"/bin/sh", (char *)"-c", (char *)"maim -s -u | xclip -selection clipboard -t image/png -i", nullptr};
 
 constexpr static Keybind keybinds[]{
-	/* MODIFIER, KEY, ARGUMENT, ACTION */
-	{Mod4Mask, XK_Return, (void *)launch_term, Actions::spawn},
-	{Mod4Mask, XK_space, (void *)launcher, Actions::spawn},
-	{Mod4Mask | ShiftMask, XK_s, (void *)screenshoot, Actions::spawn},
+	/* KEY, ARGUMENT, MODIFIER, ACTION */
+	{ XK_Return, (void *)launch_term, Mod4Mask, Actions::spawn },
+	{ XK_space, (void *)launcher, Mod4Mask, Actions::spawn },
+	{ XK_s, (void *)screenshoot, Mod4Mask | ShiftMask, Actions::spawn },
+	{ XK_q, nullptr, Mod4Mask | ShiftMask, Actions::quit },
 };
 
+const static int gap_size = 10;
 
 /* Leave this uncommented for multi-monitor support.
  *

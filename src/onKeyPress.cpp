@@ -17,6 +17,11 @@ void onKeyPress(const XKeyEvent &event) {
 			switch (keybinds[i].action_type) {
 			case Actions::spawn:
 				spawn((char **)keybinds[i].arg);
+				break;
+
+			case Actions::quit:
+				quit();
+				break;
 			}
 		}
 	}

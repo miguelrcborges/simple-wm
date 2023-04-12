@@ -13,6 +13,10 @@ Display *display;
 Monitor monitors[max_number_of_monitors];
 Window root_window;
 
+#ifdef XINERAMA
+int amount_of_connected_monitors;
+#endif
+
 
 static void printVersion() {
 	std::cout << "swm non working yet lol version.\n";
@@ -75,9 +79,16 @@ int main(int argc, char **argv) {
 			onKeyPress(event.xkey);
 			break;
 
+		case CreateNotify:
+			onCreateNotify(event.xcreatewindow);
+
 		case EnterNotify:
 		 	onEnterNotify(event.xcrossing);
 		 	break;
+
+		case MapNotify:
+			onMapNotify(event.xmap);
+			break;
 
 		case MappingNotify:
 			onMappingNotify(event.xmapping);

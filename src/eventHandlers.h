@@ -4,6 +4,8 @@
 #include <X11/Xlib.h>
 
 void onKeyPress(const XKeyEvent &event);
+void onCreateNotify(const XCreateWindowEvent &event);
+void onMapNotify(const XMapEvent &event);
 void onEnterNotify(const XEnterWindowEvent &event);
 void onMappingNotify(const XMappingEvent &event);
 void onConfigureNotify(const XConfigureEvent &event);

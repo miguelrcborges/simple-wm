@@ -5,12 +5,13 @@
 
 enum class Actions {
 	spawn,
+	quit,
 };
 
 struct Keybind {
-	unsigned int mod;
 	KeySym keysym;
 	void *arg;
+	unsigned int mod;
 	Actions action_type;
 };
 
