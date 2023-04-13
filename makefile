@@ -1,10 +1,11 @@
 CXX = g++
 WARNINGS = -Wall -Wextra -Wwrite-strings -Wno-unused-results
 CFLAGS = -march=native -O2 -ftree-vectorize -fno-semantic-interposition -fno-plt -pipe -s -flto -D_FORTIFY_SOURCE=1
-DEBUGFLAGS = -Og -g
+DEBUGFLAGS = -Og -g -D_DEBUG
 INCLUDES =
 LINKS = -lX11 -lXinerama
 
+HEADERS = $(wildcard src/*.h) $(wildcard src/**/*.h)
 SRC = $(wildcard src/*.cpp) $(wildcard src/**/*.cpp)
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 OBJDIR = obj obj/actions obj/utils
@@ -46,5 +47,5 @@ bin/swm: $(SRC)
 bin/debug: $(OBJ)
 	$(CXX) $(DEBUGFLAGS) $(LINKS) $^ -o $@
 
-obj/%.o: src/%.cpp
-	$(CXX) -c $(DEBUGFLAGS) $(INCLUDES) $^ -o $@
+obj/%.o: src/%.cpp $(HEADERS)
+	$(CXX) -c $(DEBUGFLAGS) $(INCLUDES) $< -o $@

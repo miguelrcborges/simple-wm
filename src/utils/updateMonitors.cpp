@@ -18,7 +18,8 @@ void updateMonitors() {
 	if (XineramaIsActive(display)) {
 		XineramaScreenInfo *info = XineramaQueryScreens(display, &amount_of_connected_monitors);
 
-		if (amount_of_connected_monitors > max_number_of_monitors) amount_of_connected_monitors = max_number_of_monitors;
+		if (amount_of_connected_monitors > max_number_of_monitors)
+			amount_of_connected_monitors = max_number_of_monitors;
 
 		for (int i = 0; i < amount_of_connected_monitors; ++i) {
 			monitors[i].width = info[i].width;

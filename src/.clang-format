@@ -6,3 +6,4 @@ AllowShortFunctionsOnASingleLine: None
 # LineEnding: LF # Requires clang-format 16
 PointerAlignment: Right
 DerivePointerAlignment: false
+ColumnLimit: 120

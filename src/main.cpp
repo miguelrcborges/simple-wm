@@ -4,9 +4,9 @@
 
 #include <X11/Xlib.h>
 
+#include "Monitor.h"
 #include "config.h"
 #include "eventHandlers.h"
-#include "Monitor.h"
 #include "utils/utils.h"
 
 Display *display;
@@ -16,7 +16,6 @@ Window root_window;
 #ifdef XINERAMA
 int amount_of_connected_monitors;
 #endif
-
 
 static void printVersion() {
 	std::cout << "swm non working yet lol version.\n";
@@ -73,6 +72,10 @@ int main(int argc, char **argv) {
 		XEvent event;
 		XNextEvent(display, &event);
 
+#ifdef _DEBUG
+		std::cout << "event " << event.type << '\n';
+#endif
+
 		switch (event.type) {
 
 		case KeyPress:
@@ -83,8 +86,8 @@ int main(int argc, char **argv) {
 			onCreateNotify(event.xcreatewindow);
 
 		case EnterNotify:
-		 	onEnterNotify(event.xcrossing);
-		 	break;
+			onEnterNotify(event.xcrossing);
+			break;
 
 		case MapNotify:
 			onMapNotify(event.xmap);
@@ -98,11 +101,12 @@ int main(int argc, char **argv) {
 			onConfigureNotify(event.xconfigure);
 			break;
 
-
+#ifdef _DEBUG
 		// Handle X events here
 		default:
 			std::cerr << "Unhandled event type: " << event.type << '\n';
 			break;
+#endif
 		}
 	}
 
