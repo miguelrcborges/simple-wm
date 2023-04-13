@@ -1,10 +1,8 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
-#include <iostream>
-
 #include "config.h"
-#include "Monitors.h"
+#include "Monitor.h"
 
 extern Display *display;
 extern Monitor monitors[max_number_of_monitors];
@@ -14,6 +12,7 @@ extern int amount_of_connected_monitors;
 #endif
 
 void onCreateNotify(const XCreateWindowEvent &event) {
+
 	Client newClient;
 	newClient.win = event.window;
 

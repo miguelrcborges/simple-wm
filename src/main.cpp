@@ -6,7 +6,7 @@
 
 #include "config.h"
 #include "eventHandlers.h"
-#include "Monitors.h"
+#include "Monitor.h"
 #include "utils/utils.h"
 
 Display *display;

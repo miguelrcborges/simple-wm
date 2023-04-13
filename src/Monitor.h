@@ -18,6 +18,10 @@ struct Monitor {
 	short width;
 	short height;
 	short x, y;
+	short layout;
+	short active_tags;
+	float master_percentage;
+	short num_of_masters;
 };
 
 #endif /* MONITORS_H */

@@ -1,12 +1,26 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
-#include <iostream>
+#include "utils/utils.h"
+#include "config.h"
 
-extern Display *display;
+extern Monitor monitors[max_number_of_monitors];
+
+#ifdef XINERAMA
+extern int amount_of_connected_monitors;
+#endif
 
 void onMapNotify(const XMapEvent &event) {
-	std::cout << "Mapping requested" << std::endl;
 
-	XMoveResizeWindow(display, event.window, 20, 20, 1900, 1060);
+#ifdef XINERAMA
+	for (int i = 0; i < amount_of_connected_monitors; ++i)
+		for (int ii = 0; ii < monitors->windows.size(); ++ii)
+			if (event.window == monitors->windows[i].win) {
+				rearrangeMonitor(monitors[i]);
+				return;
+			}
+
+#else
+	rearrangeMonitor(monitors[0]);
+#endif
 }
