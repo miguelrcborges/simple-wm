@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 
 	root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
-	XSelectInput(display, root_window, SubstructureNotifyMask);
+	XSelectInput(display, root_window, SubstructureNotifyMask | FocusChangeMask);
 
 	updateKeybinds();
 	updateMonitors();
