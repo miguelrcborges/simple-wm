@@ -15,6 +15,7 @@ Window root_window;
 Window last_focused;
 
 #ifdef XINERAMA
+int active_monitor;
 int amount_of_connected_monitors;
 #endif
 
@@ -66,6 +67,7 @@ int main(int argc, char **argv) {
 	XSetErrorHandler(&errorOtherWmRunning);
 	XSelectInput(display, root_window, SubstructureNotifyMask);
 
+	std::cout << "Root window is " << root_window << '\n';
 	updateKeybinds();
 	updateMonitors();
 

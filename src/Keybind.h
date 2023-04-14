@@ -7,11 +7,18 @@ enum class Actions {
 	spawn,
 	quit,
 	kill,
+	changeRatio,
+};
+
+union Arg {
+	const char *const *c;
+	void *n;
+	float f;
 };
 
 struct Keybind {
 	KeySym keysym;
-	void *arg;
+	Arg arg;
 	unsigned int mod;
 	Actions action_type;
 };

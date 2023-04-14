@@ -5,12 +5,19 @@
 
 #include <vector>
 
+enum class WindowState : unsigned char {
+	invisible,
+	tiled,
+	floating,
+	fulllscreen,
+};
+
 struct Client {
 	Window win;
-	short width;
-	short height;
+	short width, height;
 	short x, y;
-	short tags, state;
+	short tags;
+	WindowState state;
 };
 
 struct Monitor {

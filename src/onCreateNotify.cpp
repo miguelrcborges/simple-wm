@@ -4,6 +4,7 @@
 #include "Monitor.h"
 #include "config.h"
 
+#include <iostream>
 
 extern Display *display;
 extern Monitor monitors[max_number_of_monitors];
@@ -16,7 +17,10 @@ void onCreateNotify(const XCreateWindowEvent &event) {
 
 	Client newClient;
 	newClient.win = event.window;
+	newClient.state = WindowState::invisible;
 	XSelectInput(display, event.window, FocusChangeMask);
+
+	std::cout << "Creating witndow with ID " << event.window << '\n';
 
 
 #ifdef XINERAMA

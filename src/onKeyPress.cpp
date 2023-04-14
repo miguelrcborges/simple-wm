@@ -14,10 +14,9 @@ void onKeyPress(const XKeyEvent &event) {
 		if ((pressed_key_keysym == keybinds[i].keysym) && (event.state == keybinds[i].mod)) {
 			switch (keybinds[i].action_type) {
 			case Actions::spawn:
-				spawn((char **)keybinds[i].arg);
+				spawn(keybinds[i].arg.c);
 				break;
 
-			
 			case Actions::kill:
 				killWindow();
 				break;
@@ -25,6 +24,9 @@ void onKeyPress(const XKeyEvent &event) {
 			case Actions::quit:
 				quit();
 				break;
+
+			case Actions::changeRatio:
+				changeRatio(keybinds[i].arg.f);
 			}
 		}
 	}

@@ -3,12 +3,12 @@
 #include "../Monitor.h"
 #include "../config.h"
 
-#include <iostream>
-
 extern Display *display;
 extern Monitor monitors[max_number_of_monitors];
 
 void rearrangeMonitor(Monitor &monitor) {
+	if (monitor.windows.size() == 0) return;
+
 	int width_without_padding = monitor.width - (2 * gap_size);
 	if (monitor.num_of_masters != 0 && monitor.num_of_masters < monitor.windows.size() && monitor.windows.size() != 1)
 		width_without_padding -= gap_size;

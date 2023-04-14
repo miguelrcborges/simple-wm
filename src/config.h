@@ -11,11 +11,13 @@ constexpr static char *screenshoot[] = {(char *)"/bin/sh", (char *)"-c", (char *
 
 constexpr static Keybind keybinds[]{
 	/* KEY, ARGUMENT, MODIFIER, ACTION */
-	{ XK_Return, (void *)launch_term, Mod4Mask, Actions::spawn },
-	{ XK_space, (void *)launcher, Mod4Mask, Actions::spawn },
-	{ XK_s, (void *)screenshoot, Mod4Mask | ShiftMask, Actions::spawn },
+	{ XK_Return, launch_term, Mod4Mask, Actions::spawn },
+	{ XK_space, launcher, Mod4Mask, Actions::spawn },
+	{ XK_s, screenshoot, Mod4Mask | ShiftMask, Actions::spawn },
 	{ XK_c, nullptr, Mod4Mask, Actions::kill },
 	{ XK_q, nullptr, Mod4Mask | ShiftMask, Actions::quit },
+	{ XK_h, { .f = -0.05 }, Mod4Mask, Actions::changeRatio },
+	{ XK_l, { .f = 0.05 }, Mod4Mask, Actions::changeRatio },
 };
 
 const static int gap_size = 10;

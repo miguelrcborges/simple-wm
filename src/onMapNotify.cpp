@@ -16,6 +16,7 @@ void onMapNotify(const XMapEvent &event) {
 	for (int i = 0; i < amount_of_connected_monitors; ++i)
 		for (int ii = 0; ii < monitors[i].windows.size(); ++ii)
 			if (event.window == monitors[i].windows[ii].win) {
+				monitors[i].windows[ii].state = WindowState::tiled;
 				rearrangeMonitor(monitors[i]);
 				return;
 			}
