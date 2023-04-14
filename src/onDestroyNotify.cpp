@@ -5,10 +5,8 @@
 void onDestroyNotify(const XDestroyWindowEvent &event) {
 #ifdef XINERAMA
 	for (int i = 0; i < amount_of_connected_monitors; ++i) {
-		for (auto ii = monitors[i].windows.begin(); ii != monitors[0].windows.end(); ++ii) {
+		for (auto ii = monitors[i].windows.begin(); ii != monitors[i].windows.end(); ++ii) {
 			if (ii->win == event.window) {
-				if (ii->state == WindowState::tiled)
-					--monitors[i].stack_count;
 				monitors[i].windows.erase(ii);
 				return;
 			}
@@ -17,7 +15,6 @@ void onDestroyNotify(const XDestroyWindowEvent &event) {
 #else
 	for (auto i = monitors[0].windows.begin(); i != monitors[0].windows.end(); ++i) {
 		if (i->win == event.window) {
-			--monitors[i].stack_count;
 			monitors[0].windows.erase(i);
 			return;
 		}

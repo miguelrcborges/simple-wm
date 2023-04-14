@@ -67,7 +67,6 @@ int main(int argc, char **argv) {
 	XSetErrorHandler(&errorOtherWmRunning);
 	XSelectInput(display, root_window, SubstructureNotifyMask);
 
-	std::cout << "Root window is " << root_window << '\n';
 	updateKeybinds();
 	updateMonitors();
 
