@@ -1,10 +1,5 @@
-#include <X11/Xlib.h>
+#include "../globals.h"
 
-#include "../Monitor.h"
-#include "../config.h"
-
-extern Display *display;
-extern Monitor monitors[max_number_of_monitors];
 
 void rearrangeMonitor(Monitor &monitor) {
 	if (monitor.windows.size() == 0) return;

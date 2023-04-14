@@ -1,4 +1,3 @@
-#include <iostream>
 #include <spawn.h>
 #include <unistd.h>
 

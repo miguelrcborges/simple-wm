@@ -1,7 +1,4 @@
-#include <X11/Xlib.h>
-
-#include "config.h"
-#include "Monitor.h"
+#include "globals.h"
 #include "utils/utils.h"
 
 extern Display *display;

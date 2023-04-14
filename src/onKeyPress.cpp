@@ -1,11 +1,10 @@
+#include "globals.h"
+
 #include <X11/XKBlib.h>
-#include <X11/Xlib.h>
 #include <X11/keysymdef.h>
 
 #include "actions/actions.h"
-#include "config.h"
 
-extern Display *display;
 
 void onKeyPress(const XKeyEvent &event) {
 	KeySym pressed_key_keysym = XkbKeycodeToKeysym(display, event.keycode, 0, 0);

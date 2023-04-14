@@ -1,4 +1,4 @@
-#include "../config.h"
+#include "../globals.h"
 
 extern Display *display;
 extern Window root_window;

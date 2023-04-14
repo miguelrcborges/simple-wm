@@ -1,7 +1,7 @@
-#include <X11/Xlib.h>
+#include "globals.h"
+
 #include <X11/Xutil.h>
 
-#include "config.h"
 #include "utils/utils.h"
 
 extern Monitor monitors[max_number_of_monitors];

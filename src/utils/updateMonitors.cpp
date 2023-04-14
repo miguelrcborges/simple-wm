@@ -1,9 +1,6 @@
-#include <X11/Xlib.h>
+#include "../globals.h"
+
 #include <X11/extensions/Xinerama.h>
-
-#include "../config.h"
-
-#include "../Monitor.h"
 
 extern Display *display;
 extern Monitor monitors[max_number_of_monitors];

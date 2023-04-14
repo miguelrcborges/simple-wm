@@ -1,14 +1,4 @@
-#include <X11/Xlib.h>
-
-#include "Monitor.h"
-#include "config.h"
-
-extern Display *display;
-extern Monitor monitors[max_number_of_monitors];
-
-#ifdef XINERAMA
-extern int amount_of_connected_monitors;
-#endif
+#include "globals.h"
 
 void onConfigureNotify(const XConfigureEvent &event) {
 #ifdef XINERAMA
