@@ -101,6 +101,10 @@ int main(int argc, char **argv) {
 			onMapNotify(event.xmap);
 			break;
 
+		case UnmapNotify:
+			onUnmapNotify(event.xunmap);
+			break;
+
 		case MappingNotify:
 			onMappingNotify(event.xmapping);
 			break;

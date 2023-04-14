@@ -29,6 +29,7 @@ struct Monitor {
 	short active_tags;
 	float master_percentage;
 	short num_of_masters;
+	short stack_count;
 };
 
 #endif /* MONITORS_H */
