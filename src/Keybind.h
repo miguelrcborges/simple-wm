@@ -6,6 +6,7 @@
 enum class Actions {
 	spawn,
 	quit,
+	kill,
 };
 
 struct Keybind {

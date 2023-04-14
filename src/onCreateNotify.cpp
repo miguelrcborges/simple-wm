@@ -4,7 +4,6 @@
 #include "Monitor.h"
 #include "config.h"
 
-#include <iostream>
 
 extern Display *display;
 extern Monitor monitors[max_number_of_monitors];
@@ -17,11 +16,8 @@ void onCreateNotify(const XCreateWindowEvent &event) {
 
 	Client newClient;
 	newClient.win = event.window;
+	XSelectInput(display, event.window, FocusChangeMask);
 
-#ifdef _DEBUG
-	std::cout << "Window " << event.window << " created\n";
-	std::cout << event.x << 'x' << event.y << '\n';
-#endif
 
 #ifdef XINERAMA
 	for (int i = 0; i < amount_of_connected_monitors; ++i) {

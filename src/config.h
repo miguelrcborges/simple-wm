@@ -14,6 +14,7 @@ constexpr static Keybind keybinds[]{
 	{ XK_Return, (void *)launch_term, Mod4Mask, Actions::spawn },
 	{ XK_space, (void *)launcher, Mod4Mask, Actions::spawn },
 	{ XK_s, (void *)screenshoot, Mod4Mask | ShiftMask, Actions::spawn },
+	{ XK_c, nullptr, Mod4Mask, Actions::kill },
 	{ XK_q, nullptr, Mod4Mask | ShiftMask, Actions::quit },
 };
 

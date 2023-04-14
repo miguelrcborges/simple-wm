@@ -3,5 +3,6 @@
 
 void spawn(char **cmd);
 void quit();
+void killWindow();
 
 #endif /* ACTIONS_H */

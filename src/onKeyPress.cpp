@@ -17,6 +17,11 @@ void onKeyPress(const XKeyEvent &event) {
 				spawn((char **)keybinds[i].arg);
 				break;
 
+			
+			case Actions::kill:
+				killWindow();
+				break;
+
 			case Actions::quit:
 				quit();
 				break;

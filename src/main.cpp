@@ -12,6 +12,7 @@
 Display *display;
 Monitor monitors[max_number_of_monitors];
 Window root_window;
+Window last_focused;
 
 #ifdef XINERAMA
 int amount_of_connected_monitors;
@@ -63,7 +64,7 @@ int main(int argc, char **argv) {
 
 	root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
-	XSelectInput(display, root_window, SubstructureNotifyMask | FocusChangeMask);
+	XSelectInput(display, root_window, SubstructureNotifyMask);
 
 	updateKeybinds();
 	updateMonitors();
@@ -84,6 +85,11 @@ int main(int argc, char **argv) {
 
 		case CreateNotify:
 			onCreateNotify(event.xcreatewindow);
+			break;
+
+		case DestroyNotify:
+			onDestroyNotify(event.xdestroywindow);
+			break;
 
 		case EnterNotify:
 			onEnterNotify(event.xcrossing);
@@ -99,6 +105,10 @@ int main(int argc, char **argv) {
 
 		case ConfigureNotify:
 			onConfigureNotify(event.xconfigure);
+			break;
+
+		case FocusIn:
+			onFocusIn(event.xfocus);
 			break;
 
 #ifdef _DEBUG
