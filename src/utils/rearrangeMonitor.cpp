@@ -6,7 +6,7 @@ void rearrangeMonitor(Monitor &monitor) {
 	if (monitor.stack_count == 0)
 		return;
 
-	int cursor = 0;
+	size_t cursor = 0;
 	int width_without_padding = monitor.width - (2 * gap_size);
 	if (monitor.num_of_masters != 0 && monitor.num_of_masters < monitor.stack_count && monitor.stack_count != 1)
 		width_without_padding -= gap_size;

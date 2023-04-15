@@ -6,11 +6,11 @@
 void onMapNotify(const XMapEvent &event) {
 
 #ifdef XINERAMA
-	for (int i = 0; i < amount_of_connected_monitors; ++i) {
+	for (size_t i = 0; i < amount_of_connected_monitors; ++i) {
 #else
-	constexpr int i = 0;
+	constexpr size_t i = 0;
 #endif
-		for (int ii = 0; ii < monitors[i].windows.size(); ++ii) {
+		for (size_t ii = 0; ii < monitors[i].windows.size(); ++ii) {
 			if (event.window == monitors[i].windows[ii].win) {
 				if (monitors[i].windows[ii].state == WindowState::neverMapped)
 					monitors[i].windows[ii].tags = monitors[i].active_tag;

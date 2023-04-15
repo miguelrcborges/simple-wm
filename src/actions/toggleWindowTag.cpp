@@ -1,9 +1,9 @@
 #include "../globals.h"
 
 void toggleWindowTag(int tag) {
-	for (int i = 0; i < monitors[active_monitor].windows.size(); ++i) {
+	for (size_t i = 0; i < monitors[active_monitor].windows.size(); ++i) {
 		if (monitors[active_monitor].windows[i].win == last_focused) {
-			int new_tag = monitors[active_monitor].windows[i].tags ^ (1 << tag);
+			short new_tag = monitors[active_monitor].windows[i].tags ^ (1 << tag);
 			if (new_tag)
 				monitors[active_monitor].windows[i].tags = new_tag;
 			else

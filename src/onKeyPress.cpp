@@ -10,7 +10,7 @@
 void onKeyPress(const XKeyEvent &event) {
 	KeySym pressed_key_keysym = XkbKeycodeToKeysym(display, event.keycode, 0, 0);
 
-	for (int i = 0; i < keybinds_length; ++i) {
+	for (size_t i = 0; i < keybinds_length; ++i) {
 		if ((pressed_key_keysym == keybinds[i].keysym) && (event.state == keybinds[i].mod)) {
 			switch (keybinds[i].action_type) {
 			case Actions::spawn:
