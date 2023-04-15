@@ -9,6 +9,7 @@ enum class Actions {
 	kill,
 	changeRatio,
 	incrementMaster,
+	changeTag,
 };
 
 union Arg {

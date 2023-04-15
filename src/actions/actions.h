@@ -6,5 +6,6 @@ void quit();
 void killWindow();
 void changeRatio(float increment);
 void incrementMaster(int increment);
+void changeTag(int tag);
 
 #endif /* ACTIONS_H */

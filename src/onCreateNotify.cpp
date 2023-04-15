@@ -6,7 +6,7 @@ void onCreateNotify(const XCreateWindowEvent &event) {
 
 	Client newClient;
 	newClient.win = event.window;
-	newClient.state = WindowState::invisible;
+	newClient.state = WindowState::neverMapped;
 	XSelectInput(display, event.window, FocusChangeMask);
 
 

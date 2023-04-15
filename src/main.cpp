@@ -39,6 +39,11 @@ static int errorOtherWmRunning(Display *display, XErrorEvent *event) {
 	return -1;
 }
 
+static int errorHandler(Display *display, XErrorEvent *event) {
+	std::cerr << "[error] X error " << (int) event->error_code << " at " << (int) event->request_code << '\n';
+	return -2;
+}
+
 int main(int argc, char **argv) {
 	if (argc == 2) {
 		if (std::strcmp(argv[1], "-v") == 0) {
@@ -66,6 +71,7 @@ int main(int argc, char **argv) {
 	root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
 	XSelectInput(display, root_window, SubstructureNotifyMask | PointerMotionMask);
+	XSetErrorHandler(&errorHandler);
 
 	updateKeybinds();
 	updateMonitors();

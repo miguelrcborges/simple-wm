@@ -6,7 +6,8 @@
 #include <vector>
 
 enum class WindowState : unsigned char {
-	invisible,
+	neverMapped,
+	hidden,
 	tiled,
 	floating,
 	fulllscreen,
@@ -26,7 +27,7 @@ struct Monitor {
 	short height;
 	short x, y;
 	short layout;
-	short active_tags;
+	short active_tag;
 	float master_percentage;
 	short num_of_masters;
 	short stack_count;
