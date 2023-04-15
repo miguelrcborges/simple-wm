@@ -6,7 +6,9 @@
 #include "Keybind.h"
 
 #define TAGKEYS(KEY, TAG) \
-	{ KEY, { .i = TAG }, Mod4Mask, Actions::changeTag },
+	{ KEY, { .i = TAG }, Mod4Mask, Actions::changeTag }, \
+	{ KEY, { .i = TAG }, Mod4Mask | ShiftMask, Actions::setWindowTag }, \
+	{ KEY, { .i = TAG }, Mod4Mask | ControlMask, Actions::toggleWindowTag}, \
 
 constexpr static char *launch_term[] = {(char *)"xterm", nullptr};
 constexpr static char *launcher[] = {(char *)"rofi", (char *)"-show", (char *)"drun", nullptr};

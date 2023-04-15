@@ -37,6 +37,10 @@ void onKeyPress(const XKeyEvent &event) {
 			case Actions::changeTag:
 				changeTag(keybinds[i].arg.i);
 				break;
+
+			case Actions::setWindowTag:
+				setWindowTag(keybinds[i].arg.i);
+				break;
 			}
 		}
 	}

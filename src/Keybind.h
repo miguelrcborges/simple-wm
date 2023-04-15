@@ -10,6 +10,8 @@ enum class Actions {
 	changeRatio,
 	incrementMaster,
 	changeTag,
+	setWindowTag,
+	toggleWindowTag,
 };
 
 union Arg {
