@@ -15,7 +15,7 @@ Window root_window;
 Window last_focused;
 
 #ifdef XINERAMA
-int active_monitor;
+int active_monitor = 0;
 int amount_of_connected_monitors;
 #endif
 
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
 
 	root_window = DefaultRootWindow(display);
 	XSetErrorHandler(&errorOtherWmRunning);
-	XSelectInput(display, root_window, SubstructureNotifyMask);
+	XSelectInput(display, root_window, SubstructureNotifyMask | PointerMotionMask);
 
 	updateKeybinds();
 	updateMonitors();
@@ -79,6 +79,9 @@ int main(int argc, char **argv) {
 #endif
 
 		switch (event.type) {
+		case MotionNotify:
+			onMotionNotify(event.xmotion);
+			break;
 
 		case KeyPress:
 			onKeyPress(event.xkey);
@@ -90,10 +93,6 @@ int main(int argc, char **argv) {
 
 		case DestroyNotify:
 			onDestroyNotify(event.xdestroywindow);
-			break;
-
-		case EnterNotify:
-			onEnterNotify(event.xcrossing);
 			break;
 
 		case MapNotify:

@@ -8,12 +8,14 @@ enum class Actions {
 	quit,
 	kill,
 	changeRatio,
+	incrementMaster,
 };
 
 union Arg {
 	const char *const *c;
 	void *n;
 	float f;
+	int i;
 };
 
 struct Keybind {

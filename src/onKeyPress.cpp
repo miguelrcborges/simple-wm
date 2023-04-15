@@ -1,9 +1,11 @@
+#include "config.h"
 #include "globals.h"
 
 #include <X11/XKBlib.h>
 #include <X11/keysymdef.h>
 
 #include "actions/actions.h"
+#include "utils/utils.h"
 
 
 void onKeyPress(const XKeyEvent &event) {
@@ -26,6 +28,11 @@ void onKeyPress(const XKeyEvent &event) {
 
 			case Actions::changeRatio:
 				changeRatio(keybinds[i].arg.f);
+				break;
+
+			case Actions::incrementMaster:
+				incrementMaster(keybinds[i].arg.i);
+				break;
 			}
 		}
 	}

@@ -18,6 +18,8 @@ constexpr static Keybind keybinds[]{
 	{ XK_q, nullptr, Mod4Mask | ShiftMask, Actions::quit },
 	{ XK_h, { .f = -0.05 }, Mod4Mask, Actions::changeRatio },
 	{ XK_l, { .f = 0.05 }, Mod4Mask, Actions::changeRatio },
+	{ XK_i, { .i = 1 }, Mod4Mask, Actions::incrementMaster },
+	{ XK_d, { .i = -1 }, Mod4Mask, Actions::incrementMaster },
 };
 
 const static int gap_size = 10;
