@@ -4,5 +4,5 @@
 extern char **environ;
 
 void spawn(const char *const *cmd) {
-	posix_spawnp(NULL, cmd[0], NULL, NULL, (char **) cmd, environ);
+	posix_spawnp(NULL, cmd[0], NULL, NULL, (char **)cmd, environ);
 }

@@ -40,7 +40,7 @@ static int errorOtherWmRunning(Display *display, XErrorEvent *event) {
 }
 
 static int errorHandler(Display *display, XErrorEvent *event) {
-	std::cerr << "[error] X error " << (int) event->error_code << " at " << (int) event->request_code << '\n';
+	std::cerr << "[error] X error " << (int)event->error_code << " at " << (int)event->request_code << '\n';
 	return -2;
 }
 

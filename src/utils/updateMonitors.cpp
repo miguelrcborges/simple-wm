@@ -2,7 +2,6 @@
 
 #include <X11/extensions/Xinerama.h>
 
-
 void updateMonitors() {
 
 #ifdef XINERAMA

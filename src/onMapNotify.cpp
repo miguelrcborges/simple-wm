@@ -1,24 +1,26 @@
 #include "globals.h"
-
-#include <X11/Xutil.h>
-
 #include "utils/utils.h"
 
+#include <X11/Xutil.h>
 
 void onMapNotify(const XMapEvent &event) {
 
 #ifdef XINERAMA
-	for (int i = 0; i < amount_of_connected_monitors; ++i)
-		for (int ii = 0; ii < monitors[i].windows.size(); ++ii)
+	for (int i = 0; i < amount_of_connected_monitors; ++i) {
+#else
+	constexpr int i = 0;
+#endif
+		for (int ii = 0; ii < monitors[i].windows.size(); ++ii) {
 			if (event.window == monitors[i].windows[ii].win) {
+				if (monitors[i].windows[ii].state == WindowState::neverMapped)
+					monitors[i].windows[ii].tags = monitors[i].active_tag;
 				monitors[i].windows[ii].state = WindowState::tiled;
-				monitors[i].windows[ii].tags = monitors[i].active_tag;
 				++monitors[i].stack_count;
 				rearrangeMonitor(monitors[i]);
 				return;
 			}
-
-#else
-	rearrangeMonitor(monitors[0]);
+		}
+#ifdef XINERAMA
+	}
 #endif
 }

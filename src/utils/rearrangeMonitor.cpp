@@ -3,7 +3,8 @@
 #include <iostream>
 
 void rearrangeMonitor(Monitor &monitor) {
-	if (monitor.stack_count == 0) return;
+	if (monitor.stack_count == 0)
+		return;
 
 	int cursor = 0;
 	int width_without_padding = monitor.width - (2 * gap_size);
@@ -25,7 +26,7 @@ void rearrangeMonitor(Monitor &monitor) {
 
 		for (int i = 0; i < num_active_masters; ++i, ++cursor) {
 			if (monitor.windows[cursor].state != WindowState::tiled) {
-				--i;	
+				--i;
 				continue;
 			}
 			XMoveResizeWindow(display, monitor.windows[cursor].win, monitor.x + gap_size,
@@ -44,7 +45,8 @@ void rearrangeMonitor(Monitor &monitor) {
 				--i;
 				continue;
 			}
-			XMoveResizeWindow(display, monitor.windows[cursor].win, monitor.x + 2 * gap_size + master_window_width,
+			XMoveResizeWindow(display, monitor.windows[cursor].win,
+			                  monitor.x + (1 + (monitor.num_of_masters > 0)) * gap_size + master_window_width,
 			                  monitor.y + (i + 1) * gap_size + i * slaves_window_height, slaves_window_width,
 			                  slaves_window_height);
 		}

@@ -7,7 +7,6 @@
 #include "actions/actions.h"
 #include "utils/utils.h"
 
-
 void onKeyPress(const XKeyEvent &event) {
 	KeySym pressed_key_keysym = XkbKeycodeToKeysym(display, event.keycode, 0, 0);
 
@@ -40,6 +39,10 @@ void onKeyPress(const XKeyEvent &event) {
 
 			case Actions::setWindowTag:
 				setWindowTag(keybinds[i].arg.i);
+				break;
+
+			case Actions::toggleWindowTag:
+				toggleWindowTag(keybinds[i].arg.i);
 				break;
 			}
 		}
