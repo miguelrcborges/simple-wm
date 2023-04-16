@@ -9,5 +9,6 @@ void incrementMaster(int increment);
 void changeTag(int tag);
 void setWindowTag(int tag);
 void toggleWindowTag(int tag);
+void rotateStack(int tag);
 
 #endif /* ACTIONS_H */

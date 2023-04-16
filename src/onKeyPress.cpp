@@ -44,6 +44,10 @@ void onKeyPress(const XKeyEvent &event) {
 			case Actions::toggleWindowTag:
 				toggleWindowTag(keybinds[i].arg.i);
 				break;
+
+			case Actions::rotateStack:
+				rotateStack(keybinds[i].arg.i);
+				break;
 			}
 		}
 	}

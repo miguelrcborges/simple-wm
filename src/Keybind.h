@@ -12,6 +12,7 @@ enum class Actions {
 	changeTag,
 	setWindowTag,
 	toggleWindowTag,
+	rotateStack,
 };
 
 union Arg {
