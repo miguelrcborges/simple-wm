@@ -77,15 +77,15 @@ int main(int argc, char **argv) {
 
 	wm_window = XCreateSimpleWindow(display, root_window, 0, 0, 1, 1, 0, 0, 0);
 	
+	// tell which root which window is the wm
+	XChangeProperty(display, root_window, XInternAtom(display, "_NET_SUPPORTING_WM_CHECK", False),
+			XA_WINDOW, 32, PropModeReplace, (unsigned char *) &wm_window, 1);
 	// according to EWMH, the wm window must have it too
 	XChangeProperty(display, wm_window, XInternAtom(display, "_NET_SUPPORTING_WM_CHECK", False),
 			XA_WINDOW, 32, PropModeReplace, (unsigned char *) &wm_window, 1);
 	// change wm name to show on neofetch :o
 	XChangeProperty(display, wm_window, XInternAtom(display, "_NET_WM_NAME", False),
 			XInternAtom(display, "UTF8_STRING", False), 8, PropModeReplace, (unsigned char *) "swm", 3);
-	// tell which root which window is the wm
-	XChangeProperty(display, root_window, XInternAtom(display, "_NET_SUPPORTING_WM_CHECK", False),
-			XA_WINDOW, 32, PropModeReplace, (unsigned char *) &wm_window, 1);
 
 	updateKeybinds();
 	updateMonitors();
