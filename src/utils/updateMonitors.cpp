@@ -1,6 +1,8 @@
 #include "../globals.h"
 
+#ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
+#endif
 
 void updateMonitors() {
 

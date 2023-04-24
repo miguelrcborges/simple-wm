@@ -4,17 +4,20 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <X11/cursorfont.h>
 
 #include "Monitor.h"
 #include "config.h"
 #include "eventHandlers.h"
 #include "utils/utils.h"
 
-Atom test;
 Display *display;
 Monitor monitors[max_number_of_monitors];
 Window root_window, wm_window;
 Window last_focused;
+
+enum { CURSOR_NORMAL, CURSOR_RESIZE, CURSOR_MOVE };
+Cursor cursors[3];
 
 #ifdef XINERAMA
 int active_monitor = 0;
@@ -22,7 +25,7 @@ int amount_of_connected_monitors;
 #endif
 
 static void printVersion() {
-	std::cout << "swm non working yet lol version.\n";
+	std::cout << "swm every window tiles version.\n";
 }
 
 static void printUsage() {
@@ -71,8 +74,11 @@ int main(int argc, char **argv) {
 	}
 
 	root_window = DefaultRootWindow(display);
+	// A silly error checker, which should only happen if a WM is running
 	XSetErrorHandler(&errorOtherWmRunning);
+	// Set what kind of events is meant to receive
 	XSelectInput(display, root_window, SubstructureNotifyMask | PointerMotionMask);
+	// Change the error handling to a proper handler
 	XSetErrorHandler(&errorHandler);
 
 	wm_window = XCreateSimpleWindow(display, root_window, 0, 0, 1, 1, 0, 0, 0);
@@ -86,6 +92,19 @@ int main(int argc, char **argv) {
 	// change wm name to show on neofetch :o
 	XChangeProperty(display, wm_window, XInternAtom(display, "_NET_WM_NAME", False),
 			XInternAtom(display, "UTF8_STRING", False), 8, PropModeReplace, (unsigned char *) "swm", 3);
+
+	// load cursors that will be used
+	cursors[CURSOR_NORMAL] = XCreateFontCursor(display, XC_left_ptr);
+	cursors[CURSOR_RESIZE] = XCreateFontCursor(display, XC_sizing);
+	cursors[CURSOR_MOVE] = XCreateFontCursor(display, XC_boat);
+
+	// update cursor
+	{
+		XSetWindowAttributes attr;
+		attr.cursor = cursors[CURSOR_NORMAL];
+		XChangeWindowAttributes(display, root_window, CWCursor, &attr);
+	}
+
 
 	updateKeybinds();
 	updateMonitors();
@@ -136,7 +155,6 @@ int main(int argc, char **argv) {
 			break;
 
 #ifdef _DEBUG
-		// Handle X events here
 		default:
 			std::cerr << "Unhandled event type: " << event.type << '\n';
 			break;
