@@ -3,10 +3,10 @@
 
 void onCreateNotify(const XCreateWindowEvent &event) {
 
-	Client newClient;
-	newClient.win = event.window;
-	newClient.state = WindowState::neverMapped;
 	XSelectInput(display, event.window, FocusChangeMask);
 
-	monitors[active_monitor].windows.push_back(newClient);
+	monitors[active_monitor].windows.emplace_back(Client {
+			.win = event.window,
+			.state = WindowState::neverMapped
+			});
 }

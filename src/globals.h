@@ -8,8 +8,18 @@
 
 extern Display *display;
 extern Monitor monitors[max_number_of_monitors];
-extern Window root_window;
-extern Window last_focused;
+extern Window root_window, wm_window;
+extern Client *last_focused;
+
+enum { CURSOR_NORMAL, CURSOR_RESIZE, CURSOR_MOVE };
+extern Cursor cursors[3];
+
+enum class cursorAction : unsigned char {
+	NoAction,
+	Moving,
+	Resizing,
+};
+extern cursorAction cursor_action;
 
 #ifdef XINERAMA
 extern int active_monitor;

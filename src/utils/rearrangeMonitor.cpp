@@ -1,7 +1,5 @@
 #include "../globals.h"
 
-#include <iostream>
-
 void rearrangeMonitor(Monitor &monitor) {
 	if (monitor.stack_count == 0)
 		return;

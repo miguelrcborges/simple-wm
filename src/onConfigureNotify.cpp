@@ -8,7 +8,7 @@ void onConfigureNotify(const XConfigureEvent &event) {
 	constexpr size_t i = 0;
 	for (size_t ii = 0; ii < monitors[0].windows.size(); ++ii) {
 #endif
-			if (event.window == monitors[i].windows[i].win) {
+			if (event.window == monitors[i].windows[ii].win) {
 				monitors[i].windows[ii].x = event.x;
 				monitors[i].windows[ii].y = event.y;
 				monitors[i].windows[ii].width = event.width;

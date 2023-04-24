@@ -1,7 +1,6 @@
 #include "globals.h"
 #include "utils/utils.h"
 
-#include <iostream>
 
 void onDestroyNotify(const XDestroyWindowEvent &event) {
 #ifdef XINERAMA

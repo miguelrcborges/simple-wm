@@ -14,10 +14,17 @@
 Display *display;
 Monitor monitors[max_number_of_monitors];
 Window root_window, wm_window;
-Window last_focused;
+Client *last_focused = nullptr;
 
 enum { CURSOR_NORMAL, CURSOR_RESIZE, CURSOR_MOVE };
 Cursor cursors[3];
+
+enum class cursorAction : unsigned char {
+	NoAction,
+	Moving,
+	Resizing,
+};
+cursorAction cursor_action = cursorAction::NoAction;
 
 #ifdef XINERAMA
 int active_monitor = 0;
@@ -105,6 +112,11 @@ int main(int argc, char **argv) {
 		XChangeWindowAttributes(display, root_window, CWCursor, &attr);
 	}
 
+	// listen super + left click events
+	XGrabButton(display, Button1, Mod4Mask, root_window, True, ButtonPressMask|ButtonReleaseMask, GrabModeAsync, GrabModeAsync, None, None);
+
+	// listen super + right click events
+	XGrabButton(display, Button3, Mod4Mask, root_window, True, ButtonPressMask|ButtonReleaseMask, GrabModeAsync, GrabModeAsync, None, None);
 
 	updateKeybinds();
 	updateMonitors();
@@ -152,6 +164,19 @@ int main(int argc, char **argv) {
 
 		case FocusIn:
 			onFocusIn(event.xfocus);
+			break;
+
+		case ButtonPress:
+			onButtonPress(event.xbutton);
+			break;
+
+		case ButtonRelease:
+			cursor_action = cursorAction::NoAction;
+			{
+				XSetWindowAttributes attr;
+				attr.cursor = cursors[CURSOR_NORMAL];
+				XChangeWindowAttributes(display, root_window, CWCursor, &attr);
+			}
 			break;
 
 #ifdef _DEBUG

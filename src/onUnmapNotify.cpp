@@ -13,8 +13,9 @@ void onUnmapNotify(const XUnmapEvent &event) {
 #endif
 		for (size_t ii = 0; ii < monitors[i].windows.size(); ++ii) {
 			if (event.window == monitors[i].windows[ii].win) {
+				if (monitors[i].windows[ii].state == WindowState::tiled)
+					--monitors[i].stack_count;
 				monitors[i].windows[ii].state = WindowState::hidden;
-				--monitors[i].stack_count;
 				rearrangeMonitor(monitors[i]);
 				return;
 			}

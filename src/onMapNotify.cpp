@@ -12,11 +12,16 @@ void onMapNotify(const XMapEvent &event) {
 #endif
 		for (size_t ii = 0; ii < monitors[i].windows.size(); ++ii) {
 			if (event.window == monitors[i].windows[ii].win) {
-				if (monitors[i].windows[ii].state == WindowState::neverMapped)
+				if (monitors[i].windows[ii].state == WindowState::neverMapped) {
 					monitors[i].windows[ii].tags = monitors[i].active_tag;
-				monitors[i].windows[ii].state = WindowState::tiled;
-				++monitors[i].stack_count;
-				rearrangeMonitor(monitors[i]);
+					monitors[i].windows[ii].state = WindowState::tiled;
+				}
+
+				if (monitors[i].windows[ii].state == WindowState::tiled) {
+					++monitors[i].stack_count;
+					rearrangeMonitor(monitors[i]);
+				}
+
 				return;
 			}
 		}

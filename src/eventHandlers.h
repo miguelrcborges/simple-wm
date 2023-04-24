@@ -12,5 +12,6 @@ void onUnmapNotify(const XUnmapEvent &event);
 void onMappingNotify(const XMappingEvent &event);
 void onConfigureNotify(const XConfigureEvent &event);
 void onFocusIn(const XFocusChangeEvent &event);
+void onButtonPress(const XButtonEvent &event);
 
 #endif
