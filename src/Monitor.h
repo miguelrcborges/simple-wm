@@ -7,10 +7,12 @@
 
 enum class WindowState : unsigned char {
 	neverMapped,
-	hidden,
 	tiled,
 	floating,
-	fulllscreen,
+	fullscreen,
+	hidden_tiled,
+	hidden_floating,
+	hidden_fullscreen,
 };
 
 struct Client {

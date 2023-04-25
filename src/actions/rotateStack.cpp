@@ -3,8 +3,6 @@
 
 #include <climits>
 
-#include <iostream>
-
 void rotateStack(int positions) {
 	if (monitors[active_monitor].stack_count <= 1) return;
 	while (positions) {

@@ -26,6 +26,7 @@ extern int active_monitor;
 extern int amount_of_connected_monitors;
 #else
 constexpr static int active_monitor = 0;
+constexpr static int amount_of_connected_monitors = 1;
 #endif
 
 #endif

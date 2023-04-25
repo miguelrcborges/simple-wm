@@ -171,12 +171,7 @@ int main(int argc, char **argv) {
 			break;
 
 		case ButtonRelease:
-			cursor_action = cursorAction::NoAction;
-			{
-				XSetWindowAttributes attr;
-				attr.cursor = cursors[CURSOR_NORMAL];
-				XChangeWindowAttributes(display, root_window, CWCursor, &attr);
-			}
+			onButtonRelease(event.xbutton);
 			break;
 
 #ifdef _DEBUG
