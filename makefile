@@ -21,12 +21,12 @@ build: $(BINDIR) bin/swm
 clean:
 	rm -r obj bin
 
-install: build
-	cp -f bin/swm /bin/swm
-	chmod 755 /bin/swm
+install: build swm.desktop
+	install -Dm755 bin/swm /bin/swm
+	install -D swm.desktop /usr/share/xsessions/swm.desktop
 
 uninstall:
-	rm -f /bin/swm
+	rm -f /bin/swm /usr/share/xsessions/swm.desktop
 
 run: debug
 	xinit ./bin/debug -- :1 vt2
