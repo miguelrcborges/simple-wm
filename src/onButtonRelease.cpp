@@ -7,7 +7,7 @@ void onButtonRelease(const XButtonEvent &event) {
 #ifdef XINERAMA
 	for (size_t i = 0; i < amount_of_connected_monitors; ++i) {
 		for (auto ii = monitors[i].windows.begin(); ii != monitors[i].windows.end(); ++ii) {
-			if (ii->win == last_focused->win) {
+			if (last_focused && ii->win == last_focused->win) {
 				if (i != active_monitor) {
 					ii->tags = monitors[active_monitor].active_tag;
 					monitors[active_monitor].windows.emplace_back(*ii);
