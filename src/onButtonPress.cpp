@@ -3,9 +3,16 @@
 
 void onButtonPress(const XButtonEvent &event) {
 	constexpr int mouse_mask = ButtonPressMask | ButtonReleaseMask | PointerMotionMask;
+	constexpr int window_changes_mask = CWStackMode;
 
 	if (event.subwindow == None || last_focused == nullptr)
 		return;
+
+	{
+		XWindowChanges changes;
+		changes.stack_mode = Above;
+		XConfigureWindow(display, last_focused->win, window_changes_mask, &changes);
+	}
 
 	XSetWindowAttributes attr;
 	if (event.button == Button1) { 
@@ -21,10 +28,12 @@ void onButtonPress(const XButtonEvent &event) {
 	} 
 
 	if (last_focused->state != WindowState::floating) {
-		if (last_focused->state == WindowState::tiled)
+		if (last_focused->state == WindowState::tiled) {
 			--monitors[active_monitor].stack_count;
-		last_focused->state = WindowState::floating;
+			last_focused->state = WindowState::floating;
+			rearrangeMonitor(monitors[active_monitor]);
+		} else {
+			last_focused->state = WindowState::floating;
+		}
 	}
-
-	rearrangeMonitor(monitors[active_monitor]);
 }

@@ -11,7 +11,7 @@ void onMapNotify(const XMapEvent &event);
 void onUnmapNotify(const XUnmapEvent &event); 
 void onMappingNotify(const XMappingEvent &event);
 void onConfigureNotify(const XConfigureEvent &event);
-void onFocusIn(const XFocusChangeEvent &event);
+void onEnterNotify(const XCrossingEvent &event);
 void onButtonPress(const XButtonEvent &event);
 void onButtonRelease(const XButtonEvent &event);
 

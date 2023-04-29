@@ -162,8 +162,8 @@ int main(int argc, char **argv) {
 			onConfigureNotify(event.xconfigure);
 			break;
 
-		case FocusIn:
-			onFocusIn(event.xfocus);
+		case EnterNotify:
+			onEnterNotify(event.xcrossing);
 			break;
 
 		case ButtonPress:

@@ -3,7 +3,7 @@
 
 void onCreateNotify(const XCreateWindowEvent &event) {
 
-	XSelectInput(display, event.window, FocusChangeMask);
+	XSelectInput(display, event.window, EnterWindowMask);
 
 	monitors[active_monitor].windows.emplace_back(Client {
 			.win = event.window,
