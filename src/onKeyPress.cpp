@@ -48,6 +48,10 @@ void onKeyPress(const XKeyEvent &event) {
 			case Actions::rotateStack:
 				rotateStack(keybinds[i].arg.i);
 				break;
+
+			case Actions::setTiled:
+				setTiled();
+				break;
 			}
 		}
 	}

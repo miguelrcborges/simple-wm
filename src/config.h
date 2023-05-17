@@ -27,6 +27,7 @@ constexpr static Keybind keybinds[]{
 	{ XK_d, { .i = -1 }, Mod4Mask, Actions::incrementMaster },
 	{ XK_j, { .i = +1 }, Mod4Mask | ShiftMask, Actions::rotateStack },
 	{ XK_k, { .i = -1 }, Mod4Mask | ShiftMask, Actions::rotateStack },
+	{ XK_space, nullptr, Mod4Mask | ShiftMask, Actions::setTiled }, 
 	TAGKEYS(XK_1, 1)
 	TAGKEYS(XK_2, 2)
 	TAGKEYS(XK_3, 3)
