@@ -10,8 +10,8 @@ enum class Actions {
 	changeRatio,
 	incrementMaster,
 	changeTag,
-	setWindowTag,
-	toggleWindowTag,
+	setClientTag,
+	toggleClientTag,
 	rotateStack,
 	setTiled,
 };

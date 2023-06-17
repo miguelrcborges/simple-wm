@@ -7,6 +7,6 @@ void changeTag(int tag) {
 		return;
 
 	monitors[active_monitor].active_tag = new_tag;
-	checkWindowsTags(monitors[active_monitor]);
+	checkClientTags(monitors[active_monitor]);
 	rearrangeMonitor(monitors[active_monitor]);
 }

@@ -1,6 +1,6 @@
 #include "../globals.h"
 
-void toggleWindowTag(int tag) {
+void toggleClientTag(int tag) {
 	short new_tag = last_focused->tags ^ (1 << tag);
 	if (new_tag)
 		last_focused->tags = new_tag;

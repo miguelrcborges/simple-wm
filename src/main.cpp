@@ -45,12 +45,19 @@ static void printUsage() {
 	             "\t-v : Displays the version\n";
 }
 
+/**
+ * Basic error function which should be printed in case a WM is already running.
+ */
 static int errorOtherWmRunning(Display *display, XErrorEvent *event) {
 	std::cerr << "Another wm is already running.\n";
 	std::exit(-1);
 	return -1;
 }
 
+/**
+ * WM error handler.
+ * Currently it literally does nothing lol.
+ */
 static int errorHandler(Display *display, XErrorEvent *event) {
 	std::cerr << "[error] X error " << (int)event->error_code << " at " << (int)event->request_code << '\n';
 	return -2;
@@ -90,32 +97,32 @@ int main(int argc, char **argv) {
 
 	wm_window = XCreateSimpleWindow(display, root_window, 0, 0, 1, 1, 0, 0, 0);
 	
-	// tell which root which window is the wm
+	// Tell which root which window is the wm
 	XChangeProperty(display, root_window, XInternAtom(display, "_NET_SUPPORTING_WM_CHECK", False),
 			XA_WINDOW, 32, PropModeReplace, (unsigned char *) &wm_window, 1);
-	// according to EWMH, the wm window must have it too
+	// According to EWMH, the wm window must have it too
 	XChangeProperty(display, wm_window, XInternAtom(display, "_NET_SUPPORTING_WM_CHECK", False),
 			XA_WINDOW, 32, PropModeReplace, (unsigned char *) &wm_window, 1);
-	// change wm name to show on neofetch :o
+	// Change wm name to show on neofetch :o
 	XChangeProperty(display, wm_window, XInternAtom(display, "_NET_WM_NAME", False),
 			XInternAtom(display, "UTF8_STRING", False), 8, PropModeReplace, (unsigned char *) "swm", 3);
 
-	// load cursors that will be used
+	// Load cursors that will be used
 	cursors[CURSOR_NORMAL] = XCreateFontCursor(display, XC_left_ptr);
 	cursors[CURSOR_RESIZE] = XCreateFontCursor(display, XC_sizing);
 	cursors[CURSOR_MOVE] = XCreateFontCursor(display, XC_boat);
 
-	// update cursor
+	// Update cursor
 	{
 		XSetWindowAttributes attr;
 		attr.cursor = cursors[CURSOR_NORMAL];
 		XChangeWindowAttributes(display, root_window, CWCursor, &attr);
 	}
 
-	// listen super + left click events
+	// Listen super + left click events
 	XGrabButton(display, Button1, Mod4Mask, root_window, True, ButtonPressMask|ButtonReleaseMask, GrabModeAsync, GrabModeAsync, None, None);
 
-	// listen super + right click events
+	// Listen super + right click events
 	XGrabButton(display, Button3, Mod4Mask, root_window, True, ButtonPressMask|ButtonReleaseMask, GrabModeAsync, GrabModeAsync, None, None);
 
 	updateKeybinds();

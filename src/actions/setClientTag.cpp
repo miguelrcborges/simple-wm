@@ -1,6 +1,6 @@
 #include "../globals.h"
 
-void setWindowTag(int tag) {
+void setClientTag(int tag) {
 	short new_tag = 1 << tag;
 	if (new_tag == monitors[active_monitor].active_tag)
 		return;

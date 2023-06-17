@@ -18,7 +18,7 @@ void onKeyPress(const XKeyEvent &event) {
 				break;
 
 			case Actions::kill:
-				killWindow();
+				killClient();
 				break;
 
 			case Actions::quit:
@@ -37,12 +37,12 @@ void onKeyPress(const XKeyEvent &event) {
 				changeTag(keybinds[i].arg.i);
 				break;
 
-			case Actions::setWindowTag:
-				setWindowTag(keybinds[i].arg.i);
+			case Actions::setClientTag:
+				setClientTag(keybinds[i].arg.i);
 				break;
 
-			case Actions::toggleWindowTag:
-				toggleWindowTag(keybinds[i].arg.i);
+			case Actions::toggleClientTag:
+				toggleClientTag(keybinds[i].arg.i);
 				break;
 
 			case Actions::rotateStack:
