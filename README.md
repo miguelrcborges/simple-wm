@@ -31,3 +31,11 @@ exec swm
 ```
 
 If you use a display manager, there should be a desktop entry to swm.
+
+
+## To-Dos that I'm aware (sorted by priority)
+
+- [ ] Increase the amount of Atoms that the WM handles. Most urgent ones are the detection if a spawned window is fullscreen or a pop-up.
+- [ ] A bar.
+- Bug hunting & fixing
+
