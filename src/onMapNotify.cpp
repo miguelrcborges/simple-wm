@@ -11,8 +11,11 @@ void onMapNotify(const XMapEvent &event) {
 				case WindowState::neverMapped:
 					monitors[i].windows[ii].tags = monitors[i].active_tag;
 					monitors[i].windows[ii].state = WindowState::tiled;
-					++monitors[i].stack_count;
-					rearrangeMonitor(monitors[i]);
+					getWindowState(monitors[i].windows[ii]);
+					if (monitors[i].windows[ii].state == WindowState::tiled) {
+						++monitors[i].stack_count;
+						rearrangeMonitor(monitors[i]);
+					}
 					break;
 
 				case WindowState::hidden_tiled:

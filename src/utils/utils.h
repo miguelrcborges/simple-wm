@@ -26,4 +26,19 @@ void rearrangeMonitor(Monitor &monitor);
  */
 void checkClientTags(Monitor &monitor);
 
+/**
+ * Updates the window state of a given client.
+ * Currently it is used on window spawn.
+ * @param client Client whose window's state will be updated.
+ */
+void getWindowState(Client &client);
+
+/**
+ * Gets the property of a given Atom.
+ * This code is pretty much yanked from dwm's source code.
+ * @param window X's window to get the Atom's property 
+ * @param atom Atom to get its property
+ */
+Atom getAtomProperty(Window window, Atom atom);
+
 #endif /* ACTIONS_H */
